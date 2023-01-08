@@ -1,15 +1,12 @@
 <?php
 
-require_once('src/controllers/comment/add.php');
-require_once('src/controllers/comment/update.php');
-require_once('src/controllers/homepage.php');
-require_once('src/controllers/post.php');
+require_once('src/controllers/accueil.php');
+require_once('src/controllers/gestion_clients.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'gestion_clients') {
-            (new GestionClients())->execute($identifier);
-
+            (new GestionClients())->execute();
         } else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

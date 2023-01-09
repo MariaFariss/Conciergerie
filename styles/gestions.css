@@ -1,34 +1,20 @@
-.rectangle-5 {
-    background-color: #2f74b4;
-    filter:blur(100px);
-    height: 832px;
-    left: 665px;
-    position: absolute;
-    top: 0;
-    width: 615px;
-  
-}
 
-.rectangle-4{
-    background-color: #69c9be;
-    filter: blur(100px);
-    height: 832px;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 674px;
-  
-}
 
-.gestions-des-clients{
-    color: var(--black);
-    font-family: var(--font-family);
-    font-size: var(--font-family-xxl);
-    font-weight: 700;
-    left: 416px;
-    letter-spacing: 0;
-    line-height: normal;
-    position: absolute;
-    text-align: center;
-    top: 104px;
-}
+    .title{
+        text-align: center;
+        padding-top: 105px;
+    }
+
+    .groupe-1{
+        position: absolute;
+        left: 1087px;
+        top: 105px;
+        
+    }
+
+    .groupe-2{
+        position: absolute;
+        right: 1087px;
+        top: 105px;
+        
+    }

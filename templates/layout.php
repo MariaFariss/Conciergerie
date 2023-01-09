@@ -5,8 +5,7 @@
         <title><?= $title ?></title>
         <script src="https://code.iconify.design/iconify-icon/1.0.2/iconify-icon.min.js"></script>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="styles/style.css" rel="stylesheet" />
-        <link href="styles/gestions.css" rel="stylesheet" />
+        <link href="css/styles.css" rel="stylesheet" />
     </head>
 
     <body>

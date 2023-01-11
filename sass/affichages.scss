@@ -1,6 +1,23 @@
-tr {
+td,
+th {
+    padding: 20px;
+    text-align: center;
+    width: 90rem;
+}
+
+th {
+    font-size: 1.5rem;
+}
+
+.ligne {
     border: 3px solid rgb(22, 23, 22);
     border-radius: 20px;
-    background-color: darkgray;
-    
+    position: relative;
+    padding-left: 5rem;
+    padding-right: 5rem;
+    background-color: rgba($color: #FFA5A5, $alpha: 0.3);
+    a {
+        color: black;
+
+    }
 }

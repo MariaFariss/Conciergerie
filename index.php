@@ -2,14 +2,19 @@
 
 require_once('src/controllers/accueil.php');
 require_once('src/controllers/gestion_clients.php');
+require_once('src/controllers/ajout_client.php');
+require_once('src/controllers/form_ajoutclient.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
         if ($_GET['action'] === 'gestion_clients') {
             (new GestionClients())->execute();
         }
+        else if ($_GET['action'] === 'form_ajoutclient') {
+            (new FormAjoutClient())->execute();
+        }
         else if ($_GET['action'] === 'ajout_client') {
-            (new GestionClients())->execute();
+            (new AjoutClient())->execute($_POST);
         }
         else {
             throw new Exception("La page que vous recherchez n'existe pas.");

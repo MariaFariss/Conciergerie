@@ -18,6 +18,10 @@ th {
     background-color: rgba($color: #FFA5A5, $alpha: 0.3);
     a {
         color: black;
-
     }
 }
+
+a > iconify-icon{
+    color: black;
+}
+

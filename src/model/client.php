@@ -39,5 +39,12 @@ class ClientRepository
         return $clients;
     }
 
+    public function addClient( string $nom, string $adresse, string $email, string $telephone, string $facebook, string $instagram):bool {
+        $statement = $this->connection->getConnection()->prepare(
+            "INSERT INTO client (nom, adresse, email, telephone, facebook, instagram, id_membership) VALUES (?, ?, ?, ?, ?, ?, ?)"
+        );
+        return $statement->execute([$nom, $adresse, $email, $telephone, $facebook, $instagram, 1]) > 0;
+    }
+
 }
 ?>

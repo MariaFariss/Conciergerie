@@ -3,16 +3,16 @@
 <?php ob_start(); ?>
 <?php require('background.php') ?>
 <h1 class="title">Ajouter un client</h1>
-<iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon>
+<a href="index.php"><iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon></a>
 <div class="formulaire">
-    <form action="ajout_client.php" method="post" >
+    <form action="index.php?action=ajout_client" method="post" >
         <div class="group-1">
             <label for="nom">Nom</label></br>
             <input type="text" id="nom" name="nom" placeholder="Nom du client" required></br>
             <label for="facebook">facebook</label></br>
             <input type="facebook" id="facebook" name="facebook" placeholder="facebook" required></br>
-            <label for="tel">Téléphone</label></br>
-            <input type="tel" id="telephone" name="tel" placeholder="Téléphone du client" required></br>
+            <label for="telephone">Téléphone</label></br>
+            <input type="telephone" id="telephone" name="telephone" placeholder="Téléphone du client" required></br>
         </div>
         <div class="group-2">
             <label for="adresse">Adresse</label></br>

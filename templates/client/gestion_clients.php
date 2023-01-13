@@ -12,8 +12,6 @@
             <th>Nom</th>
             <th>Tel</th>
             <th>Email</th>
-            <th></th>
-            <th></th>
         </thead>
         <tbody>
             <?php
@@ -42,6 +40,11 @@
                     <td>
                         <a href="#">
                             <iconify-icon icon="material-symbols:edit" width="30"></iconify-icon>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="index.php?action=delete_client&id_client=<?= $client->id_client ?>">
+                        <iconify-icon icon="ic:baseline-delete" width="30" height="30"></iconify-icon>
                         </a>
                     </td>
 

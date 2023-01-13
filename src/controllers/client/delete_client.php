@@ -2,14 +2,14 @@
 
 require_once('src/lib/database.php');
 require_once('src/model/client.php');
-class AjoutClient
+class DeleteClient
 {
-    public function execute(array $input) {
+    public function execute(int $id_client) {
         $client = new ClientRepository();
         $client->connection = new DatabaseConnection();
-        $success = $client->addClient($input['nom'], $input['adresse'], $input['email'], $input['telephone'], $input['facebook'], $input['instagram']);
+        $success = $client->deleteClient($id_client);
         if (!$success) {
-            throw new \Exception('Impossible d\'ajouter le client !');
+            throw new \Exception('Impossible de supprimer le client !');
         } else {
             header('Location: index.php?action=gestion_clients');
         }

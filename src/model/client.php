@@ -67,5 +67,28 @@ class ClientRepository
         return false;
     }
 
+    public function deleteClient(int $id_client):bool {
+        $statement1 = $this->connection->getConnection()->prepare(
+            "DELETE FROM client WHERE id_client = ?"
+        );
+        $statement2 = $this->connection->getConnection()->prepare(
+            "DELETE FROM solde_de_points join client_solde on client_solde.id_solde = solde_de_points.id_solde WHERE id_client = ?"
+        );
+        $statement3 = $this->connection->getConnection()->prepare(
+            "DELETE FROM client_solde WHERE id_client = ?"
+        );
+        $res1 = $statement1->execute([$id_client]);
+        if($res1>0){
+            $res2 = $statement2->execute([$id_client]);
+            if($res2>0){
+                $res3 = $statement3->execute([$id_client]);
+                if($res3>0){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 }
 ?>

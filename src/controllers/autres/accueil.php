@@ -2,7 +2,7 @@
 
 class Accueil {
     public function execute() {
-        require('templates/accueil.php');
+        require('templates/autres/accueil.php');
     }
     
 }

@@ -1,7 +1,7 @@
 <?php $title = "Gestion des clients"; ?>
 
 <?php ob_start(); ?>
-<?php require('background.php') ?>
+<?php require('./templates/autres/background.php') ?>
 <h1 class="title">Ajouter un client</h1>
 <a href="index.php"><iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon></a>
 <div class="formulaire">
@@ -27,4 +27,4 @@
 </div>
 <?php $content = ob_get_clean(); ?>
 
-<?php require('layout.php') ?>
+<?php require('./templates/autres/layout.php') ?>

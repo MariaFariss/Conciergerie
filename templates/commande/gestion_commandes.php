@@ -1,40 +1,47 @@
 <?php $title = "Gestion des clients"; ?>
 
 <?php ob_start(); ?>
-<?php require('background.php') ?>
+<?php require('autres/background.php') ?>
 <h1 class="title">GESTION DES CLIENTS</h1>
-<a href="index.php?action=form_ajoutclient"><iconify-icon icon="ic:round-person-add" width="40" class="icone1" ></iconify-icon></a>
+<a href="index.php?action=form_ajoutCommande"><iconify-icon icon="ic:round-person-add" width="40" class="icone1" ></iconify-icon></a>
 <a href="index.php"><iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon></a>
 <div class="ligne">
     <table border=1 frame=void rules=rows>
         <thead>
             <th>N°</th>
-            <th>Nom</th>
-            <th>Tel</th>
-            <th>Email</th>
+            <th>numero client</th>
+            <th>Statut</th>
+            <th>Date d'expedition</th>
+            <th>frais_livraison</th>
+            <th>total</th>
             <th></th>
             <th></th>
         </thead>
         <tbody>
             <?php
-            foreach ($clients as $client) {
+            foreach ($commande as $commande) {
             ?>
-
                 <tr>
 
                     <td>
-                        <?= $client->id_client ?>
+                        <?= $commande->id_commande ?>
                     </td>
                     <td>
-                        <?= $client->nom ?>
+                        <?= $commande->id_client ?>
+                        
+                    <td>
+                    <td>
+                        <?= $commande->statut ?>
                     </td>
                     <td>
-                        <?= $client->telephone ?>
+                        <?= $commande->date_expedition ?>
                     </td>
                     <td>
-                        <?= $client->email ?>
+                        <?= $commande->frais_livraison ?>
                     </td>
                     <td>
+                        <?= $commande->total ?>
+                    </td>
                         <a href="#">
                             <iconify-icon icon="ic:baseline-remove-red-eye" width="30"></iconify-icon>
                         </a>

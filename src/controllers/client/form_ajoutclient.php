@@ -2,7 +2,7 @@
 
 class FormAjoutClient {
     public function execute() {
-        require('templates/ajout_client.php');
+        require('templates/client/ajout_client.php');
     }
     
 }

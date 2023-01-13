@@ -11,7 +11,7 @@ class GestionClients
         $clientRepository = new ClientRepository();
         $clientRepository->connection = $connection;
         $clients = $clientRepository->getClients();
-        require('templates/gestion_clients.php');
+        require('templates/client/gestion_clients.php');
         
     }
 }

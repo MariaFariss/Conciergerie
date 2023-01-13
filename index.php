@@ -1,9 +1,9 @@
 <?php
 
-require_once('src/controllers/accueil.php');
-require_once('src/controllers/gestion_clients.php');
-require_once('src/controllers/ajout_client.php');
-require_once('src/controllers/form_ajoutclient.php');
+require_once('src/controllers/autres/accueil.php');
+require_once('src/controllers/client/gestion_clients.php');
+require_once('src/controllers/client/ajout_client.php');
+require_once('src/controllers/client/form_ajoutclient.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {

@@ -7,7 +7,7 @@ class AjoutClient
     public function execute(array $input) {
         $client = new ClientRepository();
         $client->connection = new DatabaseConnection();
-        $success = $client->addClient($input['nom'], $input['adresse'], $input['email'], $input['telephone'], $input['facebook'], $input['instagram'], $input['id_membership']);
+        $success = $client->addClient($input['nom'], $input['adresse'], $input['email'], $input['telephone'], $input['facebook'], $input['instagram']);
         if (!$success) {
             throw new \Exception('Impossible d\'ajouter le commentaire !');
         } else {

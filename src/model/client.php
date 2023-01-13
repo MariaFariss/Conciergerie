@@ -40,10 +40,31 @@ class ClientRepository
     }
 
     public function addClient( string $nom, string $adresse, string $email, string $telephone, string $facebook, string $instagram):bool {
-        $statement = $this->connection->getConnection()->prepare(
+        #creer un nouveau client
+        $statement1 = $this->connection->getConnection()->prepare(
             "INSERT INTO client (nom, adresse, email, telephone, facebook, instagram, id_membership) VALUES (?, ?, ?, ?, ?, ?, ?)"
         );
-        return $statement->execute([$nom, $adresse, $email, $telephone, $facebook, $instagram, 1]) > 0;
+        #initialiser le nombre de point pour chaque clients avec id_solde	nombre_points	date_expiration	
+        $statement2 = $this->connection->getConnection()->prepare(
+            "INSERT INTO solde_de_points (nombre_points, date_expiration) VALUES (?, ?)"
+        );
+        #lier le client avec son solde de points
+        $statement3 = $this->connection->getConnection()->prepare(
+            "INSERT INTO client_solde (id_client, id_solde) VALUES (?, ?)"
+        );
+        $res1 = $statement1->execute([$nom, $adresse, $email, $telephone, $facebook, $instagram, 1]);
+        if($res1>0){
+            $idClient = $this->connection->getConnection()->lastInsertId();
+            $res2 = $statement2->execute([0, null]);
+            if($res2>0){
+                $idSolde = $this->connection->getConnection()->lastInsertId();
+                $res3 = $statement3->execute(array($idClient, $idSolde));
+                if($res3>0){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
 }

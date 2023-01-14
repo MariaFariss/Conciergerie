@@ -72,7 +72,7 @@ class ClientRepository
             "DELETE FROM client WHERE id_client = ?"
         );
         $statement2 = $this->connection->getConnection()->prepare(
-            "DELETE FROM solde_de_points join client_solde on client_solde.id_solde = solde_de_points.id_solde WHERE id_client = ?"
+            "DELETE solde_de_points FROM solde_de_points join client_solde on client_solde.id_solde = solde_de_points.id_solde WHERE id_client = ?"
         );
         $statement3 = $this->connection->getConnection()->prepare(
             "DELETE FROM client_solde WHERE id_client = ?"
@@ -90,5 +90,16 @@ class ClientRepository
         return false;
     }
 
+
+    public function updateClient(int $id_client, string $nom, string $adresse, string $email, string $telephone, string $facebook, string $instagram):bool {
+        $statement = $this->connection->getConnection()->prepare(
+            "UPDATE client SET nom = ?, adresse = ?, email = ?, telephone = ?, facebook = ?, instagram = ? WHERE id_client = ?"
+        );
+        $res = $statement->execute([$nom, $adresse, $email, $telephone, $facebook, $instagram, $id_client]);
+        if($res>0){
+            return true;
+        }
+        return false;
+    }
 }
 ?>

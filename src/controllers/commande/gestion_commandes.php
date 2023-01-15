@@ -8,10 +8,10 @@ class GestionCommandes
     public function execute()
     {
         $connection = new DatabaseConnection();
-        $commandeRepository = new CommandeReposirtory();
+        $commandeRepository = new CommandeRepository();
         $commandeRepository->connection = $connection;
-        $clients = $commandeRepository->getCommande();
-        require('templates/gestion_commandes.php');
+        $commande = $commandeRepository->getCommands();
+        require('templates/commande/gestion_commandes.php');
         
     }
 }

@@ -1,9 +1,9 @@
 <?php $title = "Gestion des clients"; ?>
 
 <?php ob_start(); ?>
-<?php require('autres/background.php') ?>
+<?php require('templates/autres/background.php') ?>
 <h1 class="title">GESTION DES CLIENTS</h1>
-<a href="index.php?action=form_ajoutCommande"><iconify-icon icon="ic:round-person-add" width="40" class="icone1" ></iconify-icon></a>
+<a href="index.php?action=export_csv"><iconify-icon icon="material-symbols:export-notes" width="40" class="icone1"></iconify-icon></a>
 <a href="index.php"><iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon></a>
 <div class="ligne">
     <table border=1 frame=void rules=rows>
@@ -22,13 +22,12 @@
             foreach ($commande as $commande) {
             ?>
                 <tr>
-
                     <td>
                         <?= $commande->id_commande ?>
                     </td>
                     <td>
                         <?= $commande->id_client ?>
-                        
+
                     <td>
                     <td>
                         <?= $commande->statut ?>
@@ -42,9 +41,9 @@
                     <td>
                         <?= $commande->total ?>
                     </td>
-                        <a href="#">
-                            <iconify-icon icon="ic:baseline-remove-red-eye" width="30"></iconify-icon>
-                        </a>
+                    <a href="#">
+                        <iconify-icon icon="ic:baseline-remove-red-eye" width="30"></iconify-icon>
+                    </a>
                     </td>
                     <td>
                         <a href="#">
@@ -65,4 +64,4 @@
 
 <?php $content = ob_get_clean(); ?>
 
-<?php require('layout.php') ?>
+<?php require('templates/autres/layout.php') ?>

@@ -33,7 +33,7 @@
                         <?= $client->email ?>
                     </td>
                     <td>
-                        <a href="#">
+                        <a href="index.php?action=consulter_fiche_client&id_client=<?= $client->id_client ?>">
                             <iconify-icon icon="ic:baseline-remove-red-eye" width="30"></iconify-icon>
                         </a>
                     </td>

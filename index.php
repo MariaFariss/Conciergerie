@@ -5,6 +5,8 @@ require_once('src/controllers/client/gestion_clients.php');
 require_once('src/controllers/client/ajout_client.php');
 require_once('src/controllers/client/form_ajoutclient.php');
 require_once('src/controllers/client/delete_client.php');
+require_once('src/controllers/client/modifier_fiche_client.php');
+require_once('src/controllers/client/form_modifier_fiche_client.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -20,6 +22,18 @@ try {
         else if ($_GET['action'] === 'delete_client') {
             if(isset($_GET['id_client']) && $_GET['id_client']>0){
                 (new DeleteClient())->execute($_GET['id_client']);
+            }
+            
+        }
+        else if ($_GET['action'] === 'form_modifier_fiche_client') {
+            if(isset($_GET['id_client']) && $_GET['id_client']>0){
+                (new FormModifClient())->execute($_GET['id_client']);   
+            }
+            
+        }
+        else if ($_GET['action'] === 'modifier_fiche_client') {
+            if(isset($_GET['id_client']) && $_GET['id_client']>0){
+                (new UpdateClient())->execute($_GET['id_client'], $_POST);   
             }
             
         }

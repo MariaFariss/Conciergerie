@@ -38,7 +38,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="#">
+                        <a href="index.php?action=form_modifier_fiche_client&id_client=<?= $client->id_client ?>">
                             <iconify-icon icon="material-symbols:edit" width="30"></iconify-icon>
                         </a>
                     </td>

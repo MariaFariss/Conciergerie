@@ -101,5 +101,23 @@ class ClientRepository
         }
         return false;
     }
+
+    public function getClientById(int $id_client): Client {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM client WHERE id_client = ?"
+        );
+        $statement->execute([$id_client]);
+        $row = $statement->fetch();
+        $client = new Client();
+        $client->id_client = $row['id_client'];
+        $client->nom = $row['nom'];
+        $client->adresse = $row['adresse'];
+        $client->email = $row['email'];
+        $client->telephone = $row['telephone'];
+        $client->facebook = $row['facebook'];
+        $client->instagram = $row['instagram'];
+        $client->id_membership = $row['id_membership'];
+        return $client;
+    }
 }
 ?>

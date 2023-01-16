@@ -12,7 +12,8 @@ class ConsulterFicheClient
         $clientRepository->connection = $connection;
         $client = $clientRepository->getClientById($id_client);
         $commande = $clientRepository->getCommandsClient($id_client);
-        //$membership = $clientRepository->getMembershipClient($client->id_membership);
+        $membership = $clientRepository->getMembershipClient($id_client);
+        $solde = $clientRepository->getPointsClient($id_client);
         require('templates/client/consulter_fiche_client.php');
         
     }

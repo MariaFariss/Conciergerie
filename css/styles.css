@@ -115,6 +115,14 @@ input {
   border: none;
 }
 
+.infoLeft {
+  width: 700px;
+}
+
+.rightInfo {
+  width: 300px;
+}
+
 td,
 th {
   padding: 20px;

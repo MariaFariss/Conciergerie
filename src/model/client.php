@@ -3,6 +3,7 @@
 require_once('src/lib/database.php');
 require_once('src/model/commande.php');
 require_once('src/model/Membership.php');
+require_once('src/model/solde_de_points.php');
 
 class Client  
 {
@@ -146,38 +147,25 @@ class ClientRepository
         return $commandes;
     }
 
-    // public function getPointsClient(int $id_client) : array
-    // {
-    //     $statement = $this->connection->getConnection()->prepare(
-    //         "SELECT * FROM solde_de_points join client_solde on client_solde.id_solde = solde_de_points.id_solde WHERE id_client = ?"
-    //     );
-    //     $statement->execute([$id_client]);
-    //     $points = [];
-    //     while (($row = $statement->fetch())) {
-    //         $point = new SoldeDePoints();
-    //         $point->id_solde = $row['id_solde'];
-    //         $point->nombre_points = $row['nombre_points'];
-    //         $point->date_expiration = $row['date_expiration'];
-    //         $points[] = $point;
-    //     }
-    //     return $points;
-    // }
-
-    public function getMembershipClient(int $id_client) : array
+    public function getMembershipClient(int $id_client) : String
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT * FROM membership join client_membership on client_membership.id_membership = membership.id_membership WHERE id_client = 10SELECT * FROM membership join client_membership on client_membership.id_membership = membership.id_membership WHERE id_client = 10SELECT FROM membership join client on client.id_membership = membership.id_membership WHERE id_client = ?"
+            "SELECT nom_membership FROM membership join client on client.id_membership = membership.id_membership WHERE id_client = ?"
         );
         $statement->execute([$id_client]);
-        $memberships = [];
         $row = $statement->fetch();
-        $membership = new Membership();
-        $membership->id_membership = $row['id_membership'];
-        $membership->nom_membership = $row['nom_membership'];
-        $membership->solde_min = $row['solde_min'];
-        $membership->solde_max = $row['solde_max']; 
-        $memberships[] = $membership;
-        return $memberships;
+        return $row['nom_membership'];
+    }
+
+    public function getPointsClient(int $id_client) : int
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT nombre_points FROM solde_de_points join client_solde on client_solde.id_solde = solde_de_points.id_solde WHERE id_client = ?"
+        );
+        $statement->execute([$id_client]);
+        $row = $statement->fetch();
+        
+        return $row['nombre_points'];
     }
 }
 ?>

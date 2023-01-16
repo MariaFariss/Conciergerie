@@ -1,4 +1,4 @@
-<?php $title = "Gestion des clients"; ?>
+<?php $title = "Ajout d'un client"; ?>
 
 <?php ob_start(); ?>
 <?php require('./templates/autres/background.php') ?>

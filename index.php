@@ -10,6 +10,8 @@ require_once('src/controllers/client/form_modifier_fiche_client.php');
 require_once('src/controllers/commande/gestion_commandes.php');
 require_once('src/controllers/commande/export_csv.php');
 require_once('src/controllers/client/consulter_fiche_client.php');
+require_once('src/controllers/commande/ajout_commande.php');
+require_once('src/controllers/commande/form_ajout_commande.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -48,8 +50,16 @@ try {
             if(isset($_GET['id_client']) && $_GET['id_client']>0){
                 (new ConsulterFicheClient())->execute($_GET['id_client']);   
             }
-        }   
+        } 
         
+        //commande
+        else if ($_GET['action'] === 'form_ajoutCommande') {
+            (new FormAjoutCommande())->execute();
+        }
+        else if ($_GET['action'] === 'ajout_commande') {
+            print_r($_POST);
+            (new AjoutCommande())->execute($_POST);
+        }
         else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

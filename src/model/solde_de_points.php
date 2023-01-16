@@ -1,6 +1,5 @@
 <?php
 
-require_once('src/lib/database.php');
 class SoldePoints
 {
     public int $id_solde;

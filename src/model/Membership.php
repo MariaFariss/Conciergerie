@@ -1,6 +1,5 @@
-    <?php
+<?php
 
-require_once('src/lib/database.php');
 class Membership
 {
     public int $id_membership;

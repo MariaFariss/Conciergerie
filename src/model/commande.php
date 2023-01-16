@@ -1,7 +1,7 @@
 <?php
 
 require_once('src/lib/database.php');
-class commande{
+class Commande{
     public int $id_commande;
     public string $date_commande;
     public float $total;
@@ -10,7 +10,7 @@ class commande{
     public float $restant_a_payer;
     public float $frais_livraison;
     public String $statut;
-    public string $date_expedition;
+    public String $date_expedition;
     public String $note;
     public int $id_client;
 }
@@ -42,10 +42,29 @@ public function getCommands(): array
         return $commandes;
     }
 
-    public function addCommand(DateTime $date_commande, float $total, DateTime $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, DateTime $date_expedition, String $note):bool {
+    public function addCommand(String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note):bool {
         $statement = $this->connection->getConnection()->prepare(
             "INSERT INTO commande (date_commande, total, date_livraison, frais_depot, restant_a_payer, frais_livraison, statut, date_expedition, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
         );
-        return $statement->execute([$date_commande, $total, $date_livraison, $frais_depot, $restant_a_payer, $frais_livraison, $statut, $date_expedition, $note]) > 0;
+        return $statement->execute([strtotime($date_commande), $total, strtotime($date_livraison), $frais_depot, $restant_a_payer, $frais_livraison, $statut, strtotime($date_expedition), $note]) > 0;
+    }
+
+    public function getArticlesByCommande(int $id_commande): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM article join article_commande on article.id_article = article_commande.id_article WHERE id_commande = ?"
+        );
+        $statement->execute([$id_commande]);
+        $articles = [];
+        while (($row = $statement->fetch())) {
+            $article = new Article();
+            $article->id_article = $row['id_article'];
+            $article->nom_article = $row['nom_article'];
+            $article->prix_commande = $row['prix_commande'];
+            $article->prix_magasin = $row['prix_magasin'];
+            $article->prix_vip = $row['prix_vip'];
+            $articles[] = $article;
+        }
+        return $articles;
     }
 }

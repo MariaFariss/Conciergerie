@@ -2,20 +2,18 @@
 
 <?php ob_start(); ?>
 <?php require('templates/autres/background.php') ?>
-<h1 class="title">GESTION DES CLIENTS</h1>
+<h1 class="title">GESTION DES COMMANDES</h1>
 <a href="index.php?action=export_csv"><iconify-icon icon="material-symbols:export-notes" width="40" class="icone1"></iconify-icon></a>
 <a href="index.php"><iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon></a>
 <div class="ligne">
     <table border=1 frame=void rules=rows>
         <thead>
             <th>N°</th>
-            <th>numero client</th>
+            <th>Numéro client</th>
             <th>Statut</th>
-            <th>Date d'expedition</th>
-            <th>frais_livraison</th>
-            <th>total</th>
-            <th></th>
-            <th></th>
+            <th>Date d'expédition</th>
+            <th>Frais de livraison</th>
+            <th>Total</th>
         </thead>
         <tbody>
             <?php
@@ -27,32 +25,44 @@
                     </td>
                     <td>
                         <?= $commande->id_client ?>
-
-                    <td>
+                    </td>
                     <td>
                         <?= $commande->statut ?>
                     </td>
                     <td>
-                        <?= $commande->date_expedition ?>
+                        <?php $date = new DateTime($commande->date_expedition);
+                        echo ($date->format("Y-m-d")) ?>
                     </td>
                     <td>
-                        <?= $commande->frais_livraison ?>
+                        <?= $commande->frais_livraison ?> $
                     </td>
                     <td>
-                        <?= $commande->total ?>
+                        <?= $commande->total ?> $
                     </td>
-                    <a href="#">
-                        <iconify-icon icon="ic:baseline-remove-red-eye" width="30"></iconify-icon>
-                    </a>
+                    <td>
+                        <a href="#">
+                            <iconify-icon icon="ri:bill-fill" width="30"></iconify-icon>
+                        </a>
                     </td>
                     <td>
                         <a href="#">
                             <iconify-icon icon="material-symbols:edit" width="30"></iconify-icon>
                         </a>
                     </td>
-
+                    <td>
+                        <a href="#">
+                            <iconify-icon icon="ic:baseline-remove-red-eye" width="30"></iconify-icon>
+                        </a>
+                    </td>
+                    <td>
+                        <a href="#">
+                            <iconify-icon icon="ic:baseline-delete" width="30" height="30"></iconify-icon>
+                        </a>
+                    </td>
+                    <a href="index.php?action=form_ajoutCommande">
+                    <input type="submit" class="boutton1" value="Ajouter une commande">
+                    </a>
                 </tr>
-
 
             <?php
             }

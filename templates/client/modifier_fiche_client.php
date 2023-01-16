@@ -1,5 +1,4 @@
 <?php $title = "Gestion des clients"; ?>
-
 <?php ob_start(); ?>
 <?php require('./templates/autres/background.php') ?>
 <h1 class="title">Modifier une fiche un client</h1>

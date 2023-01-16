@@ -108,7 +108,7 @@
   color: rgb(192, 116, 23);
 }
 
-input {
+select, input {
   width: 300px;
   height: 40px;
   border-radius: 10px;
@@ -121,6 +121,22 @@ input {
 
 .rightInfo {
   width: 300px;
+}
+
+.boutton1 {
+  position: absolute;
+  top: absolute;
+  left: 75vw;
+  background-color: rgb(217, 173, 114);
+}
+
+.bouttonCommande {
+  position: absolute;
+  top: 430px;
+  left: 30vw;
+  width: 100px;
+  height: 50px;
+  color: rgb(192, 116, 23);
 }
 
 td,

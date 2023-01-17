@@ -37,7 +37,7 @@
             <label for="id_client">Id client</label></br>
             <input type="text" id="id_client" name="id_client" placeholder="id client" required></br>
         </div>
-        <input type="submit" class="bouttonCommande" value="Modifier">
+        <input type="submit" class="bouttonCommande" value="Ajouter">
     </form>
 </div>
 <?php $content = ob_get_clean(); ?>

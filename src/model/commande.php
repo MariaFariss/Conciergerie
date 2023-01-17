@@ -42,11 +42,14 @@ public function getCommands(): array
         return $commandes;
     }
 
-    public function addCommand(String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note):bool {
+    public function addCommand(String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note, int $id_client):bool {
         $statement = $this->connection->getConnection()->prepare(
-            "INSERT INTO commande (date_commande, total, date_livraison, frais_depot, restant_a_payer, frais_livraison, statut, date_expedition, note) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            "INSERT INTO commande (date_commande, total, date_livraison, frais_depot, restant_a_payer, frais_livraison, statut, date_expedition, note, id_client) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         );
-        return $statement->execute([strtotime($date_commande), $total, strtotime($date_livraison), $frais_depot, $restant_a_payer, $frais_livraison, $statut, strtotime($date_expedition), $note]) > 0;
+        $date_commande = date("Y-m-d H:i:s", strtotime($date_commande));
+        $date_livraison = date("Y-m-d H:i:s", strtotime($date_livraison));
+        $date_expedition = date("Y-m-d H:i:s", strtotime($date_expedition));
+        return $statement->execute([$date_commande, $total, $date_livraison, $frais_depot, $restant_a_payer, $frais_livraison, $statut, $date_expedition, $note, $id_client]) > 0;
     }
 
     public function getArticlesByCommande(int $id_commande): array

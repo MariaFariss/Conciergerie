@@ -6,7 +6,7 @@ class AjoutCommande
     public function execute(array $input) {
         $commande = new CommandeRepository();
         $commande->connection = new DatabaseConnection();
-        $commande->addCommand($input['date_commande'], $input['total'], $input['date_livraison'], $input['frais_depot'], $input['restant_a_payer'], $input['frais_livraison'], $input['statut'], $input['date_expedition'], $input['note']);
+        $commande->addCommand($input['date_commande'], $input['total'], $input['date_livraison'], $input['frais_depot'], $input['restant_a_payer'], $input['frais_livraison'], $input['statut'], $input['date_expedition'], $input['note'], $input['id_client']);
         if ($commande) {
             header('Location: index.php?action=ajout_commande');
         } else{

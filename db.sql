@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Jan 15, 2023 at 10:49 PM
+-- Generation Time: Jan 17, 2023 at 06:40 PM
 -- Server version: 5.7.36
 -- PHP Version: 7.4.26
 
@@ -35,7 +35,15 @@ CREATE TABLE IF NOT EXISTS `article` (
   `prix_magasin` float NOT NULL,
   `prix_vip` float DEFAULT NULL,
   PRIMARY KEY (`id_article`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `article`
+--
+
+INSERT INTO `article` (`id_article`, `nom_article`, `prix_commande`, `prix_magasin`, `prix_vip`) VALUES
+(1, 'Parfum beauté', 17, 20, 18),
+(2, 'Parfum rose', 46, 59, 55);
 
 -- --------------------------------------------------------
 
@@ -51,6 +59,14 @@ CREATE TABLE IF NOT EXISTS `article_commande` (
   PRIMARY KEY (`id_article`,`id_commande`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `article_commande`
+--
+
+INSERT INTO `article_commande` (`id_article`, `id_commande`, `quantite_commande`) VALUES
+(1, 1, 5),
+(2, 1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -61,6 +77,7 @@ DROP TABLE IF EXISTS `article_facture`;
 CREATE TABLE IF NOT EXISTS `article_facture` (
   `id_article` int(11) NOT NULL,
   `id_facture` int(11) NOT NULL,
+  `Quantite` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id_article`,`id_facture`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -115,7 +132,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 --
 
 INSERT INTO `client` (`id_client`, `nom`, `adresse`, `facebook`, `instagram`, `email`, `telephone`, `id_membership`) VALUES
-(12, 'mindi', '7 rue bonheur', 'smthing', 'mondos', 'mondos@gmail.com', '01765952', 1),
+(12, 'mimi', '7 rue bonheur', 'smthing', 'mondos', 'mondos@gmail.com', '01765952', 1),
 (10, 'mindi', '7 rue bonheur', 'changement1', 'mondos', 'mondos@gmail.com', '01765952', 1);
 
 -- --------------------------------------------------------
@@ -136,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `client_solde` (
 --
 
 INSERT INTO `client_solde` (`id_client`, `id_solde`) VALUES
-(5, 3),
+(10, 3),
 (12, 10);
 
 -- --------------------------------------------------------
@@ -159,14 +176,15 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `note` varchar(255) DEFAULT NULL,
   `id_client` int(11) NOT NULL,
   PRIMARY KEY (`id_commande`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `commande`
 --
 
 INSERT INTO `commande` (`id_commande`, `date_commande`, `total`, `date_livraison`, `frais_depot`, `restant_a_payer`, `frais_livraison`, `statut`, `date_expedition`, `note`, `id_client`) VALUES
-(1, '2023-01-15 21:01:04', 255, '2023-01-24 20:59:37', 200, 55, 17, 'Acheté', '2023-01-16 20:59:37', 'salut', 10);
+(1, '2023-01-15 21:01:04', 255, '2023-01-24 20:59:37', 200, 55, 17, 'Acheté', '2023-01-16 20:59:37', 'salut', 10),
+(2, '2023-01-16 20:44:48', 567, '2023-02-08 20:43:30', 130, 567, 50, 'Acheté', '2023-02-01 20:43:30', 'Payé !', 10);
 
 -- --------------------------------------------------------
 
@@ -326,7 +344,7 @@ CREATE TABLE IF NOT EXISTS `solde_de_points` (
 --
 
 INSERT INTO `solde_de_points` (`id_solde`, `nombre_points`, `date_expiration`) VALUES
-(10, 0, NULL),
+(10, 5, NULL),
 (3, 0, NULL);
 
 -- --------------------------------------------------------

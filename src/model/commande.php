@@ -52,6 +52,53 @@ public function getCommands(): array
         return $statement->execute([$date_commande, $total, $date_livraison, $frais_depot, $restant_a_payer, $frais_livraison, $statut, $date_expedition, $note, $id_client]) > 0;
     }
 
+    //update commande
+    public function updateCommand(int $id_commande, String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note, int $id_client):bool {
+        $statement = $this->connection->getConnection()->prepare(
+            "UPDATE commande SET date_commande = ?, total = ?, date_livraison = ?, frais_depot = ?, restant_a_payer = ?, frais_livraison = ?, statut = ?, date_expedition = ?, note = ?, id_client = ? WHERE id_commande = ?"
+        );
+        $date_commande = date("Y-m-d H:i:s", strtotime($date_commande));
+        $date_livraison = date("Y-m-d H:i:s", strtotime($date_livraison));
+        $date_expedition = date("Y-m-d H:i:s", strtotime($date_expedition));
+        return $statement->execute([$date_commande, $total, $date_livraison, $frais_depot, $restant_a_payer, $frais_livraison, $statut, $date_expedition, $note, $id_client, $id_commande]) > 0;
+    }
+
+    //getCommandById
+    public function getCommandById(int $id_commande): Commande
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM commande WHERE id_commande = ?"
+        );
+        $statement->execute([$id_commande]);
+        $row = $statement->fetch();
+        $commande = new Commande();
+        $commande->id_commande = $row['id_commande'];
+        $commande->date_commande = $row['date_commande'];
+        $commande->total = $row['total'];
+        $commande->date_livraison = $row['date_livraison'];
+        $commande->frais_depot = $row['frais_depot'];
+        $commande->restant_a_payer = $row['restant_a_payer'];
+        $commande->frais_livraison = $row['frais_livraison'];
+        $commande->statut = $row['statut'];
+        $commande->date_expedition = $row['date_expedition'];
+        $commande->note = $row['note'];
+        $commande->id_client = $row['id_client'];
+        return $commande;
+    }
+
+    // public function getArticlesRestants(int $id_commande, array $articles): array
+    // {
+    //     $articlesRestants = array();
+    //     foreach ($articles as $article) {
+    //         $statement = $this->connection->getConnection()->prepare(
+    //             "SELECT quantite_commande FROM article_commande WHERE id_article = ? AND id_commande = ?"
+    //         );
+    //         $statement->execute([$article->id_article, $id_commande]);
+    //         $row = $statement->fetch();
+    //         $article->quantite = $row['quantite'];
+    //         $articlesRestants[] = $article;
+    //     }
+    // }
     public function getArticlesByCommande(int $id_commande): array
     {
         $statement = $this->connection->getConnection()->prepare(
@@ -70,4 +117,6 @@ public function getCommands(): array
         }
         return $articles;
     }
+    
+    
 }

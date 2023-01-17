@@ -12,6 +12,8 @@ require_once('src/controllers/commande/export_csv.php');
 require_once('src/controllers/client/consulter_fiche_client.php');
 require_once('src/controllers/commande/ajout_commande.php');
 require_once('src/controllers/commande/form_ajout_commande.php');
+require_once('src/controllers/commande/form_modifier_fiche_commande.php');
+require_once('src/controllers/commande/modifier_fiche_commande.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -60,6 +62,16 @@ try {
             print_r($_POST);
             (new AjoutCommande())->execute($_POST);
         }
+
+        else if ($_GET['action'] === 'form_modifier_fiche_commande') {
+            (new FormModifCommande())->execute($_GET['id_commande']);
+        }
+        else if ($_GET['action'] === 'modifier_fiche_commande') {
+            if(isset($_GET['id_commande']) && $_GET['id_commande']>0){
+                (new UpdateCommande())->execute($_GET['id_commande'], $_POST);   
+            }
+            }
+        
         else {
             throw new Exception("La page que vous recherchez n'existe pas.");
         }

@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1:3306
--- Generation Time: Jan 17, 2023 at 06:40 PM
--- Server version: 5.7.36
--- PHP Version: 7.4.26
+-- Hôte : 127.0.0.1:3306
+-- Généré le : mar. 17 jan. 2023 à 20:22
+-- Version du serveur : 5.7.36
+-- Version de PHP : 8.0.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `conciergerie`
+-- Base de données : `conciergerie`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article`
+-- Structure de la table `article`
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `article` (
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `article`
+-- Déchargement des données de la table `article`
 --
 
 INSERT INTO `article` (`id_article`, `nom_article`, `prix_commande`, `prix_magasin`, `prix_vip`) VALUES
@@ -48,7 +48,7 @@ INSERT INTO `article` (`id_article`, `nom_article`, `prix_commande`, `prix_magas
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article_commande`
+-- Structure de la table `article_commande`
 --
 
 DROP TABLE IF EXISTS `article_commande`;
@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `article_commande` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `article_commande`
+-- Déchargement des données de la table `article_commande`
 --
 
 INSERT INTO `article_commande` (`id_article`, `id_commande`, `quantite_commande`) VALUES
@@ -70,7 +70,7 @@ INSERT INTO `article_commande` (`id_article`, `id_commande`, `quantite_commande`
 -- --------------------------------------------------------
 
 --
--- Table structure for table `article_facture`
+-- Structure de la table `article_facture`
 --
 
 DROP TABLE IF EXISTS `article_facture`;
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `article_facture` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `avantage`
+-- Structure de la table `avantage`
 --
 
 DROP TABLE IF EXISTS `avantage`;
@@ -98,7 +98,7 @@ CREATE TABLE IF NOT EXISTS `avantage` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `avantage_membership`
+-- Structure de la table `avantage_membership`
 --
 
 DROP TABLE IF EXISTS `avantage_membership`;
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `avantage_membership` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client`
+-- Structure de la table `client`
 --
 
 DROP TABLE IF EXISTS `client`;
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `client`
+-- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`id_client`, `nom`, `adresse`, `facebook`, `instagram`, `email`, `telephone`, `id_membership`) VALUES
@@ -138,7 +138,7 @@ INSERT INTO `client` (`id_client`, `nom`, `adresse`, `facebook`, `instagram`, `e
 -- --------------------------------------------------------
 
 --
--- Table structure for table `client_solde`
+-- Structure de la table `client_solde`
 --
 
 DROP TABLE IF EXISTS `client_solde`;
@@ -149,7 +149,7 @@ CREATE TABLE IF NOT EXISTS `client_solde` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `client_solde`
+-- Déchargement des données de la table `client_solde`
 --
 
 INSERT INTO `client_solde` (`id_client`, `id_solde`) VALUES
@@ -159,7 +159,7 @@ INSERT INTO `client_solde` (`id_client`, `id_solde`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commande`
+-- Structure de la table `commande`
 --
 
 DROP TABLE IF EXISTS `commande`;
@@ -176,20 +176,21 @@ CREATE TABLE IF NOT EXISTS `commande` (
   `note` varchar(255) DEFAULT NULL,
   `id_client` int(11) NOT NULL,
   PRIMARY KEY (`id_commande`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `commande`
+-- Déchargement des données de la table `commande`
 --
 
 INSERT INTO `commande` (`id_commande`, `date_commande`, `total`, `date_livraison`, `frais_depot`, `restant_a_payer`, `frais_livraison`, `statut`, `date_expedition`, `note`, `id_client`) VALUES
 (1, '2023-01-15 21:01:04', 255, '2023-01-24 20:59:37', 200, 55, 17, 'Acheté', '2023-01-16 20:59:37', 'salut', 10),
-(2, '2023-01-16 20:44:48', 567, '2023-02-08 20:43:30', 130, 567, 50, 'Acheté', '2023-02-01 20:43:30', 'Payé !', 10);
+(2, '2023-01-16 20:44:48', 567, '2023-02-08 20:43:30', 130, 567, 50, 'Acheté', '2023-02-01 20:43:30', 'Payé !', 10),
+(3, '2023-01-20 23:00:00', 56, '2023-01-12 23:00:00', 67, 78, 78, 'Acheté', '2023-01-13 23:00:00', 'sdpkfjdkf', 12);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `commande_expedition`
+-- Structure de la table `commande_expedition`
 --
 
 DROP TABLE IF EXISTS `commande_expedition`;
@@ -202,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `commande_expedition` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `expedition`
+-- Structure de la table `expedition`
 --
 
 DROP TABLE IF EXISTS `expedition`;
@@ -216,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `expedition` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `facture`
+-- Structure de la table `facture`
 --
 
 DROP TABLE IF EXISTS `facture`;
@@ -232,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `facture` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `historique`
+-- Structure de la table `historique`
 --
 
 DROP TABLE IF EXISTS `historique`;
@@ -246,7 +247,7 @@ CREATE TABLE IF NOT EXISTS `historique` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `membership`
+-- Structure de la table `membership`
 --
 
 DROP TABLE IF EXISTS `membership`;
@@ -259,7 +260,7 @@ CREATE TABLE IF NOT EXISTS `membership` (
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `membership`
+-- Déchargement des données de la table `membership`
 --
 
 INSERT INTO `membership` (`id_membership`, `nom_membership`, `solde_min`, `solde_max`) VALUES
@@ -270,7 +271,7 @@ INSERT INTO `membership` (`id_membership`, `nom_membership`, `solde_min`, `solde
 -- --------------------------------------------------------
 
 --
--- Table structure for table `paiement`
+-- Structure de la table `paiement`
 --
 
 DROP TABLE IF EXISTS `paiement`;
@@ -286,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `paiement` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `paiement_historique`
+-- Structure de la table `paiement_historique`
 --
 
 DROP TABLE IF EXISTS `paiement_historique`;
@@ -299,7 +300,7 @@ CREATE TABLE IF NOT EXISTS `paiement_historique` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reduction`
+-- Structure de la table `reduction`
 --
 
 DROP TABLE IF EXISTS `reduction`;
@@ -315,7 +316,7 @@ CREATE TABLE IF NOT EXISTS `reduction` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `reduction_historique`
+-- Structure de la table `reduction_historique`
 --
 
 DROP TABLE IF EXISTS `reduction_historique`;
@@ -328,7 +329,7 @@ CREATE TABLE IF NOT EXISTS `reduction_historique` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `solde_de_points`
+-- Structure de la table `solde_de_points`
 --
 
 DROP TABLE IF EXISTS `solde_de_points`;
@@ -340,7 +341,7 @@ CREATE TABLE IF NOT EXISTS `solde_de_points` (
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `solde_de_points`
+-- Déchargement des données de la table `solde_de_points`
 --
 
 INSERT INTO `solde_de_points` (`id_solde`, `nombre_points`, `date_expiration`) VALUES
@@ -350,7 +351,7 @@ INSERT INTO `solde_de_points` (`id_solde`, `nombre_points`, `date_expiration`) V
 -- --------------------------------------------------------
 
 --
--- Table structure for table `stock`
+-- Structure de la table `stock`
 --
 
 DROP TABLE IF EXISTS `stock`;

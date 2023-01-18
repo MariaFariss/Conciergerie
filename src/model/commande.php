@@ -1,6 +1,9 @@
 <?php
 
 require_once('src/lib/database.php');
+require_once('src/model/Facture.php');
+require_once('src/model/Paiement.php');
+require_once('src/model/Article.php');
 class Commande{
     public int $id_commande;
     public string $date_commande;
@@ -18,7 +21,7 @@ class Commande{
 class CommandeRepository
 {
     public DatabaseConnection $connection;
-public function getCommands(): array
+    public function getCommands(): array
     {
         $statement = $this->connection->getConnection()->query(
             "SELECT * FROM commande ORDER BY id_commande"
@@ -85,20 +88,73 @@ public function getCommands(): array
         $commande->id_client = $row['id_client'];
         return $commande;
     }
+    
+    //getfacture
+    public function getFacture(int $id_commande): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM facture WHERE id_commande = ?"
+        );
+        $statement->execute([$id_commande]);
+        $factures = [];
+        $facture = new Facture();
+        $rows = $statement->fetchAll(PDO :: FETCH_ASSOC);
+        foreach ($rows as $row) {
+            $facture->id_facture = $row['id_facture'];
+            $facture->date = $row['date'];
+            $facture->date_mise_a_jour = $row['date_mise_a_jour'];
+            $facture->montant = $row['montant'];
+            $facture->id_commande = $row['id_commande'];
+            $factures[] = $facture;
+        }
+        return $factures;
+    }
+    //getPaiement
+    public function getPaiements(int $id_commande): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM paiement WHERE id_commande = ?"
+        );
+        $statement->execute([$id_commande]);
+        $paiements = [];
+        $paiement = new Paiement();
+        $rows = $statement->fetchAll(PDO :: FETCH_ASSOC);
+        foreach ($rows as $row) {
+            $paiement->id_paiement = $row['id_paiement'];
+            $paiement->montant = $row['montant'];
+            $paiement->date_paiement = $row['$date_paiement'];
+            $paiement->type = $row['type'];
+            $paiement->id_commande = $row['id_commande'];
+            $paiements[] = $paiement;
+        }
+        return $paiements;
+    }
 
-    // public function getArticlesRestants(int $id_commande, array $articles): array
-    // {
-    //     $articlesRestants = array();
-    //     foreach ($articles as $article) {
-    //         $statement = $this->connection->getConnection()->prepare(
-    //             "SELECT quantite_commande FROM article_commande WHERE id_article = ? AND id_commande = ?"
-    //         );
-    //         $statement->execute([$article->id_article, $id_commande]);
-    //         $row = $statement->fetch();
-    //         $article->quantite = $row['quantite'];
-    //         $articlesRestants[] = $article;
-    //     }
-    // }
+    public function getArticlesRestants(int $id_commande, array $articles): array
+    {
+        $articlesRestants = array();
+        foreach ($articles as $article) {
+            $statement = $this->connection->getConnection()->prepare(
+                "SELECT quantite_commande FROM article_commande WHERE id_article = ? AND id_commande = ?"
+            );
+            $statement->execute([$article->id_article, $id_commande]);
+            $row = $statement->fetch();
+            $articlesRestants[$article->id_article] = $row['quantite_commande'];
+        }
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * from article_facture WHERE id_facture = (SELECT id_facture FROM facture WHERE id_commande = ?)"
+        );
+        $statement->execute([$id_commande]);
+        while (($row = $statement->fetch())) {
+            foreach ($articlesRestants as $key => $value) {
+                if ($key == $row['id_article']) {
+                    $articlesRestants[$key] -= $row['Quantite'];
+                }
+            }
+        }
+        return $articlesRestants;
+    }
+
     public function getArticlesByCommande(int $id_commande): array
     {
         $statement = $this->connection->getConnection()->prepare(

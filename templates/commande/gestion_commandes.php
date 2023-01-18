@@ -40,7 +40,7 @@
                         <?= $commande->total ?> $
                     </td>
                     <td>
-                        <a href="#">
+                        <a href="index.php?action=form_ajout_facture&id_commande=<?= $commande->id_commande ?>">
                             <iconify-icon icon="ri:bill-fill" width="30"></iconify-icon>
                         </a>
                     </td>
@@ -50,7 +50,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="#">
+                        <a href="index.php?action=consulter_commande&id_commande=<?= $commande->id_commande ?>">
                             <iconify-icon icon="ic:baseline-remove-red-eye" width="30"></iconify-icon>
                         </a>
                     </td>
@@ -61,6 +61,9 @@
                     </td>
                     <a href="index.php?action=form_ajoutCommande">
                     <input type="submit" class="boutton1" value="Ajouter une commande">
+                    </a>
+                    <a href="index.php?action=gestion_des_articles">
+                    <input type="submit" class="boutton" value="Article">
                     </a>
                 </tr>
 

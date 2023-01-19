@@ -33,25 +33,31 @@ class ArticleRepository
         return $articles;
     }
 
-    // //addArticles
-    // public function addArticles(array $articles): void
-    // {
-    //     $statement = $this->connection->getConnection()->prepare(
-    //         "INSERT INTO article (nom_article, prix_commande, prix_magasin, prix_vip) VALUES (?, ?, ?, ?)"
-    //     );
-    //     foreach ($articles as $article) {
-    //         $statement->execute([$article->nom_article, $article->prix_commande, $article->prix_magasin, $article->prix_vip]);
-    //     }
-    // }
+    //addArticle
+    public function addArticle(string $nom_article, float $prix_commande, float $prix_magasin, float $prix_vip): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "INSERT INTO article (nom_article, prix_commande, prix_magasin, prix_vip) VALUES (?, ?, ?, ?)"
+        );
+        return $statement->execute([$nom_article, $prix_commande, $prix_magasin, $prix_vip]);
+    }
 
-    // //updateArticles
-    // public function updateArticles(array $articles): void
-    // {
-    //     $statement = $this->connection->getConnection()->prepare(
-    //         "UPDATE article SET nom_article = ?, prix_commande = ?, prix_magasin = ?, prix_vip = ? WHERE id_article = ?"
-    //     );
-    //     foreach ($articles as $article) {
-    //         $statement->execute([$article->nom_article, $article->prix_commande, $article->prix_magasin, $article->prix_vip, $article->id_article]);
-    //     }
-    // }
+    //getquentite and statut from stock
+    public function getStock(): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM stock ORDER BY id_stock"
+        );
+        $stocks = [];
+        $statement->execute();
+        while (($row = $statement->fetch())){
+            $stock = new Stock();
+            $stock->id_stock = $row['id_stock'];
+            $stock->statut_article = $row['statut_article'];
+            $stock->quantite_produit = $row['quantite_produit'];
+            $stock->id_article = $row['id_article'];
+            $stocks[] = $stock;
+        }
+        return $stocks;
+    }
 }

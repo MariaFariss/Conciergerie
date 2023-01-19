@@ -56,7 +56,7 @@
                     ?>
                 </tbody>
             </table>
-            <input type="submit" class="bouttonCommande" value="Valider">
+            <input type="submit" name="valider" class="bouttonCommande" value="Valider">
         </div>
     </form>
 </div>

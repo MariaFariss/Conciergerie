@@ -173,6 +173,36 @@ class CommandeRepository
         }
         return $articles;
     }
-    
-    
+
+    public function addFacture(int $id_commande, array $articles): bool
+    {
+        $montant = 0;
+        foreach ($articles as $key => $value) {
+            $statement = $this->connection->getConnection()->prepare(
+                "SELECT prix_magasin FROM article WHERE nom_article = ?"
+            );
+            $statement->execute([str_replace("_", " ", $key)]);
+            $row = $statement->fetch();
+            $montant += $row['prix_magasin'] * $value;
+        }
+
+        $statement = $this->connection->getConnection()->prepare(
+            "INSERT INTO facture (date, date_mise_a_jour, montant, id_commande) VALUES (time(), time(), ?, ?)"
+        );
+        $statement->execute([$montant, $id_commande]);
+
+        foreach ($articles as $key => $value) {
+            $statement = $this->connection->getConnection()->prepare(
+                "SELECT id_article FROM article WHERE nom_article = ?"
+            );
+            $statement->execute([str_replace("_", " ", $key)]);
+            $row = $statement->fetch();
+            $id_article = $row['id_article'];
+            $statement = $this->connection->getConnection()->prepare(
+                "INSERT INTO article_facture (id_article, id_facture, Quantite) VALUES (?, ?, ?)"
+            );
+            $statement->execute([$id_article, $this->connection->getConnection()->lastInsertId(), $value]);
+        }
+        return true;
+    }
 }

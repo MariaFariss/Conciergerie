@@ -17,6 +17,9 @@ require_once('src/controllers/commande/modifier_fiche_commande.php');
 require_once('src/controllers/commande/consulter_commande.php');
 require_once('src/controllers/commande/form_ajout_facture.php');
 require_once('src/controllers/article/gestion_des_articles.php');
+require_once('src/controllers/commande/ajout_facture.php');
+require_once('src/controllers/article/form_ajout_article.php');
+require_once('src/controllers/article/ajouter_article.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -80,6 +83,11 @@ try {
                 (new FormAjoutFacture())->execute($_GET['id_commande']);   
             }
         }
+        else if ($_GET['action'] === 'ajout_facture') {
+            if(isset($_GET['id_commande']) && $_GET['id_commande']>0){
+                (new AjoutFacture())->execute($_GET['id_commande'], $_POST);   
+            }
+        }
         else if ($_GET['action'] === 'consulter_commande') {
             if(isset($_GET['id_commande']) && $_GET['id_commande']>0){
                 (new ConsulterCommande())->execute($_GET['id_commande']);   
@@ -90,12 +98,12 @@ try {
         else if ($_GET['action'] === 'gestion_des_articles') {
             (new GestionArticles())->execute();
         }
-        // else if ($_GET['action'] === 'form_ajout_article') {
-        //     (new FormAjoutArticle())->execute();
-        // }
-        // else if ($_GET['action'] === 'ajout_article') {
-        //     (new AjoutArticle())->execute($_POST);
-        // }
+        else if ($_GET['action'] === 'form_ajout_article') {
+            (new FormAjoutArticle())->execute();
+        }
+        else if ($_GET['action'] === 'ajout_article') {
+            (new AjoutArticle())->execute($_POST);
+        }
         // else if ($_GET['action'] === 'form_modifier_fiche_article') {
         //     if(isset($_GET['id_article']) && $_GET['id_article']>0){
         //         (new FormModifArticle())->execute($_GET['id_article']);   

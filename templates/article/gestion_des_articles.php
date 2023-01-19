@@ -3,6 +3,7 @@
 <?php ob_start(); ?>
 <?php require('templates/autres/background.php') ?>
 <h1 class="title">GESTION DES ARTICLES</h1>
+<a href="index.php?action=form_ajout_article"> <iconify-icon icon="icon-park-solid:add-one" width="40" class="icone1" ></iconify-icon></a>
 <a href="index.php"><iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon></a>
 <div class="ligne">
     <table border=1 frame=void rules=rows>

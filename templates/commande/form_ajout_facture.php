@@ -32,7 +32,7 @@
                                     <?= $article->nom_article ?>
                                 </td>
                                 <td>
-                                    <select id="<?= $article->id_article ?>" name="<?= $article->nom_article ?>">
+                                    <select id="article<?= $article->id_article ?>" name="<?= $article->nom_article ?>">
                                         <?php
                                         for ($i = 0; $i <= $qArticles[$article->id_article]; $i++) {
                                             if ($i == $qArticles[$article->id_article])

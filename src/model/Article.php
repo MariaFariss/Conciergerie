@@ -1,5 +1,7 @@
-<?php
 
+<?php
+require_once('src/lib/database.php');
+require_once('src/model/Stock.php');
 class Article {
     public int $id_article;
     public string $nom_article;
@@ -55,21 +57,71 @@ class ArticleRepository
     }
 
     //getquentite and statut from stock
-    public function getStock(): array
+    public function getStock(): Stock
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT * FROM stock ORDER BY id_stock"
+            "SELECT * FROM stock"
         );
-        $stocks = [];
         $statement->execute();
+        $stock = new Stock();
         while (($row = $statement->fetch())){
-            $stock = new Stock();
-            $stock->id_stock = $row['id_stock'];
             $stock->statut_article = $row['statut_article'];
             $stock->quantite_produit = $row['quantite_produit'];
-            $stock->id_article = $row['id_article'];
-            $stocks[] = $stock;
         }
-        return $stocks;
+        return $stock;
+    }
+
+    //delete article
+    public function deleteArticle(int $id_article): bool
+    {
+        $statement1 = $this->connection->getConnection()->prepare(
+            "DELETE FROM article WHERE id_article = ?"
+        );
+        $statement2 = $this->connection->getConnection()->prepare(
+            "DELETE FROM stock WHERE id_article = ?"
+        );
+        $res1 = $statement1->execute([$id_article]);
+        if($res1>0){
+            $res2 = $statement2->execute([$id_article]);
+            if($res2>0){
+                return true;
+            }
+        }  
+        return false; 
+    }
+
+    //update article
+    public function updateArticle(int $id_article, string $nom_article, float $prix_commande, float $prix_magasin, float $prix_vip, string $statut_article, int $quantite_produit): bool
+    {
+        $statement1 = $this->connection->getConnection()->prepare(
+            "UPDATE article SET nom_article = ?, prix_commande = ?, prix_magasin = ?, prix_vip = ? WHERE id_article = ?"
+        );
+        $statement2 = $this->connection->getConnection()->prepare(
+            "UPDATE stock SET statut_article = ?, quantite_produit = ? WHERE id_article = ?"
+        );
+        $res1 = $statement1->execute([$nom_article, $prix_commande, $prix_magasin, $prix_vip, $id_article]);
+        if($res1>0){
+            $res2 = $statement2->execute([$statut_article, $quantite_produit, $id_article]);
+            if($res2>0){
+                return true;
+            }
+        }
+        return false;
+    }
+    //getArticleById
+    public function getArticleById(int $id_article): Article
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM article WHERE id_article = ?"
+        );
+        $statement->execute([$id_article]);
+        $row = $statement->fetch();
+        $article = new Article();
+        $article->id_article = $row['id_article'];
+        $article->nom_article = $row['nom_article'];
+        $article->prix_commande = $row['prix_commande'];
+        $article->prix_magasin = $row['prix_magasin'];
+        $article->prix_vip = $row['prix_vip'];
+        return $article;
     }
 }

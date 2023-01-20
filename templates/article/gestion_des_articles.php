@@ -36,12 +36,12 @@
                         <?= $article->prix_vip ?>
                     </td>
                     <td>
-                        <a href="index.php?action=form_modifier_fiche_commande&id_commande=<?= $article->id_article ?>">
+                        <a href="index.php?action=form_modifier_fiche_article&id_article=<?= $article->id_article ?>">
                             <iconify-icon icon="material-symbols:edit" width="30"></iconify-icon>
                         </a>
                     </td>
                     <td>
-                        <a href="#">
+                        <a href="index.php?action=delete_article&id_article=<?= $article->id_article ?>">
                             <iconify-icon icon="ic:baseline-delete" width="30" height="30"></iconify-icon>
                         </a>
                     </td>

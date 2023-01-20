@@ -20,6 +20,9 @@ require_once('src/controllers/article/gestion_des_articles.php');
 require_once('src/controllers/commande/ajout_facture.php');
 require_once('src/controllers/article/form_ajout_article.php');
 require_once('src/controllers/article/ajouter_article.php');
+require_once('src/controllers/article/delete_article.php');
+require_once('src/controllers/article/form_modifier_article.php');
+require_once('src/controllers/article/modifier_fiche_article.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -35,8 +38,7 @@ try {
         else if ($_GET['action'] === 'delete_client') {
             if(isset($_GET['id_client']) && $_GET['id_client']>0){
                 (new DeleteClient())->execute($_GET['id_client']);
-            }
-            
+            }  
         }
         else if ($_GET['action'] === 'form_modifier_fiche_client') {
             if(isset($_GET['id_client']) && $_GET['id_client']>0){
@@ -104,16 +106,21 @@ try {
         else if ($_GET['action'] === 'ajout_article') {
             (new AjoutArticle())->execute($_POST);
         }
-        // else if ($_GET['action'] === 'form_modifier_fiche_article') {
-        //     if(isset($_GET['id_article']) && $_GET['id_article']>0){
-        //         (new FormModifArticle())->execute($_GET['id_article']);   
-        //     }
-        // }
-        // else if ($_GET['action'] === 'modifier_fiche_article') {
-        //     if(isset($_GET['id_article']) && $_GET['id_article']>0){
-        //         (new UpdateArticle())->execute($_GET['id_article'], $_POST);   
-        //     }
-        // }
+        else if ($_GET['action'] === 'delete_article') {
+            if(isset($_GET['id_article']) && $_GET['id_article']>0){
+                (new DeleteArticle())->execute($_GET['id_article']);
+            }  
+        }
+        else if ($_GET['action'] === 'form_modifier_fiche_article') {
+            if(isset($_GET['id_article']) && $_GET['id_article']>0){
+                (new FormModifArticle())->execute($_GET['id_article']);   
+            }
+        }
+        else if ($_GET['action'] === 'modifier_fiche_article') {
+            if(isset($_GET['id_article']) && $_GET['id_article']>0){
+                (new UpdateArticle())->execute($_GET['id_article'], $_POST);   
+            }
+        }
         
         else {
             throw new Exception("La page que vous recherchez n'existe pas.");

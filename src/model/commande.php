@@ -142,7 +142,7 @@ class CommandeRepository
             $articlesRestants[$article->id_article] = $row['quantite_commande'];
         }
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT * from article_facture WHERE id_facture = (SELECT id_facture FROM facture WHERE id_commande = ?)"
+            "SELECT * from article_facture WHERE id_facture = ANY (SELECT id_facture FROM facture WHERE id_commande = ?)"
         );
         $statement->execute([$id_commande]);
         while (($row = $statement->fetch())) {
@@ -192,6 +192,9 @@ class CommandeRepository
         $statement->execute([date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $montant, $id_commande]);
         $id_facture = $this->connection->getConnection()->lastInsertId();
         foreach ($articles as $key => $value) {
+            if ($value == 0) {
+                continue;
+            }
             $statement = $this->connection->getConnection()->prepare(
                 "SELECT id_article FROM article WHERE nom_article = ?"
             );

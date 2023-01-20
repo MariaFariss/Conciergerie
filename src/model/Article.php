@@ -34,12 +34,24 @@ class ArticleRepository
     }
 
     //addArticle
-    public function addArticle(string $nom_article, float $prix_commande, float $prix_magasin, float $prix_vip): bool
+    public function addArticle(string $nom_article, float $prix_commande, float $prix_magasin, float $prix_vip, string $statut_article, int $quantite_produit): bool
     {
-        $statement = $this->connection->getConnection()->prepare(
+        $statement1 = $this->connection->getConnection()->prepare(
             "INSERT INTO article (nom_article, prix_commande, prix_magasin, prix_vip) VALUES (?, ?, ?, ?)"
         );
-        return $statement->execute([$nom_article, $prix_commande, $prix_magasin, $prix_vip]);
+        #initialiser le stock
+        $statement2 = $this->connection->getConnection()->prepare(
+            "INSERT INTO stock (statut_article, quantite_produit, id_article) VALUES (?, ?, ?)"
+        );
+       $res1 = $statement1->execute([$nom_article, $prix_commande, $prix_magasin, $prix_vip]);
+        if($res1>0){
+            $idArticle = $this->connection->getConnection()->lastInsertId();
+            $res2 = $statement2->execute([$statut_article, $quantite_produit, $idArticle]);
+            if($res2>0){
+                return true;
+            }
+        }
+        return false;
     }
 
     //getquentite and statut from stock

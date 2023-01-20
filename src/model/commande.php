@@ -101,7 +101,7 @@ class CommandeRepository
         $rows = $statement->fetchAll(PDO :: FETCH_ASSOC);
         foreach ($rows as $row) {
             $facture->id_facture = $row['id_facture'];
-            $facture->date = $row['date'];
+            $facture->date_creation = $row['date_creation'];
             $facture->date_mise_a_jour = $row['date_mise_a_jour'];
             $facture->montant = $row['montant'];
             $facture->id_commande = $row['id_commande'];
@@ -187,10 +187,10 @@ class CommandeRepository
         }
 
         $statement = $this->connection->getConnection()->prepare(
-            "INSERT INTO facture (date, date_mise_a_jour, montant, id_commande) VALUES (time(), time(), ?, ?)"
+            "INSERT INTO facture (date_creation, date_mise_a_jour, montant, id_commande) VALUES (?, ?, ?, ?)"
         );
-        $statement->execute([$montant, $id_commande]);
-
+        $statement->execute([date("Y-m-d H:i:s"), date("Y-m-d H:i:s"), $montant, $id_commande]);
+        $id_facture = $this->connection->getConnection()->lastInsertId();
         foreach ($articles as $key => $value) {
             $statement = $this->connection->getConnection()->prepare(
                 "SELECT id_article FROM article WHERE nom_article = ?"
@@ -201,7 +201,7 @@ class CommandeRepository
             $statement = $this->connection->getConnection()->prepare(
                 "INSERT INTO article_facture (id_article, id_facture, Quantite) VALUES (?, ?, ?)"
             );
-            $statement->execute([$id_article, $this->connection->getConnection()->lastInsertId(), $value]);
+            $statement->execute([$id_article, $id_facture, $value]);
         }
         return true;
     }

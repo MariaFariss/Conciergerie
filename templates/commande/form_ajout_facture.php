@@ -34,7 +34,7 @@
                             <td>
                                 <select id="statut" name="<?= $article->nom_article ?>">
                                     <?php
-                                    for($i = 1; $i <= $qArticles[$article->id_article]; $i++){
+                                    for($i = 0; $i <= $qArticles[$article->id_article]; $i++){
                                         if ($i == $qArticles[$article->id_article])
                                             echo "<option value='$i' selected>$i</option>";
                                         else

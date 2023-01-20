@@ -4,7 +4,7 @@
 <h1 class="title">Ajouter un arcticle</h1>
 <a href="index.php"><iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon></a>
 <div class="formulaire">
-    <form action="index.php?action=form_ajout_article" method="post">
+    <form action="index.php?action=ajout_article" method="post">
         <div class="group-1">
             <label for="text">Nom article</label></br>
             <input type="text" id="nom_article" name="nom_article" placeholder="nom article" required></br>

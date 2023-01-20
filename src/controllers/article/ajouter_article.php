@@ -7,12 +7,11 @@ class AjoutArticle
     public function execute(array $input) {
         $article = new ArticleRepository();
         $article->connection = new DatabaseConnection();
-        $success = $article->addArticle($input['nom'], $input['prenom'], $input['adresse'], $input['telephone'], $input['email'], $input['date_naissance'], $input['sexe'], $input['ville'], $input['code_postal'], $input['pays'], $input['type_client']);
-        $stock = $article->getStock();
+        $success = $article->addArticle($input['nom_article'], $input['prix_commande'], $input['prix_magasin'], $input['prix_vip'], $input['statut_article'], $input['quantite_produit']);
         if (!$success) {
             throw new \Exception('Impossible d\'ajouter le client !');
         } else {
-            header('Location: index.php?action=gestion_commande');
+            header('Location: index.php?action=gestion_des_articles');
         }
     }
 }

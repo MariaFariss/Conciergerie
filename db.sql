@@ -2,10 +2,10 @@
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : mar. 17 jan. 2023 à 20:22
--- Version du serveur : 5.7.36
--- Version de PHP : 8.0.13
+-- Host: 127.0.0.1:3306
+-- Generation Time: Jan 20, 2023 at 05:23 PM
+-- Server version: 5.7.36
+-- PHP Version: 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `conciergerie`
+-- Database: `conciergerie`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `article`
+-- Table structure for table `article`
 --
 
 DROP TABLE IF EXISTS `article`;
@@ -35,20 +35,21 @@ CREATE TABLE IF NOT EXISTS `article` (
   `prix_magasin` float NOT NULL,
   `prix_vip` float DEFAULT NULL,
   PRIMARY KEY (`id_article`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `article`
+-- Dumping data for table `article`
 --
 
 INSERT INTO `article` (`id_article`, `nom_article`, `prix_commande`, `prix_magasin`, `prix_vip`) VALUES
 (1, 'Parfum beauté', 17, 20, 18),
-(2, 'Parfum rose', 46, 59, 55);
+(2, 'Parfum rose', 46, 59, 56),
+(9, 'Chanel', 255, 200, 45);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `article_commande`
+-- Table structure for table `article_commande`
 --
 
 DROP TABLE IF EXISTS `article_commande`;
@@ -60,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `article_commande` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `article_commande`
+-- Dumping data for table `article_commande`
 --
 
 INSERT INTO `article_commande` (`id_article`, `id_commande`, `quantite_commande`) VALUES
@@ -70,7 +71,7 @@ INSERT INTO `article_commande` (`id_article`, `id_commande`, `quantite_commande`
 -- --------------------------------------------------------
 
 --
--- Structure de la table `article_facture`
+-- Table structure for table `article_facture`
 --
 
 DROP TABLE IF EXISTS `article_facture`;
@@ -84,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `article_facture` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `avantage`
+-- Table structure for table `avantage`
 --
 
 DROP TABLE IF EXISTS `avantage`;
@@ -98,7 +99,7 @@ CREATE TABLE IF NOT EXISTS `avantage` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `avantage_membership`
+-- Table structure for table `avantage_membership`
 --
 
 DROP TABLE IF EXISTS `avantage_membership`;
@@ -111,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `avantage_membership` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `client`
+-- Table structure for table `client`
 --
 
 DROP TABLE IF EXISTS `client`;
@@ -128,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `client` (
 ) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `client`
+-- Dumping data for table `client`
 --
 
 INSERT INTO `client` (`id_client`, `nom`, `adresse`, `facebook`, `instagram`, `email`, `telephone`, `id_membership`) VALUES
@@ -138,7 +139,7 @@ INSERT INTO `client` (`id_client`, `nom`, `adresse`, `facebook`, `instagram`, `e
 -- --------------------------------------------------------
 
 --
--- Structure de la table `client_solde`
+-- Table structure for table `client_solde`
 --
 
 DROP TABLE IF EXISTS `client_solde`;
@@ -149,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `client_solde` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `client_solde`
+-- Dumping data for table `client_solde`
 --
 
 INSERT INTO `client_solde` (`id_client`, `id_solde`) VALUES
@@ -159,7 +160,7 @@ INSERT INTO `client_solde` (`id_client`, `id_solde`) VALUES
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commande`
+-- Table structure for table `commande`
 --
 
 DROP TABLE IF EXISTS `commande`;
@@ -179,18 +180,18 @@ CREATE TABLE IF NOT EXISTS `commande` (
 ) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `commande`
+-- Dumping data for table `commande`
 --
 
 INSERT INTO `commande` (`id_commande`, `date_commande`, `total`, `date_livraison`, `frais_depot`, `restant_a_payer`, `frais_livraison`, `statut`, `date_expedition`, `note`, `id_client`) VALUES
 (1, '2023-01-15 21:01:04', 255, '2023-01-24 20:59:37', 200, 55, 17, 'Acheté', '2023-01-16 20:59:37', 'salut', 10),
 (2, '2023-01-16 20:44:48', 567, '2023-02-08 20:43:30', 130, 567, 50, 'Acheté', '2023-02-01 20:43:30', 'Payé !', 10),
-(3, '2023-01-20 23:00:00', 56, '2023-01-12 23:00:00', 67, 78, 78, 'Acheté', '2023-01-13 23:00:00', 'sdpkfjdkf', 12);
+(3, '2023-01-09 23:00:00', 577, '2023-01-15 23:00:00', 67, 78, 17, 'Acheté', '2023-01-10 23:00:00', 'sdpkfjdkf', 12);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `commande_expedition`
+-- Table structure for table `commande_expedition`
 --
 
 DROP TABLE IF EXISTS `commande_expedition`;
@@ -203,7 +204,7 @@ CREATE TABLE IF NOT EXISTS `commande_expedition` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `expedition`
+-- Table structure for table `expedition`
 --
 
 DROP TABLE IF EXISTS `expedition`;
@@ -217,23 +218,23 @@ CREATE TABLE IF NOT EXISTS `expedition` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `facture`
+-- Table structure for table `facture`
 --
 
 DROP TABLE IF EXISTS `facture`;
 CREATE TABLE IF NOT EXISTS `facture` (
   `id_facture` int(255) NOT NULL AUTO_INCREMENT,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `date_de_mise-a_jour` timestamp NOT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `date_mise_a_jour` timestamp NOT NULL,
   `montant` float NOT NULL,
   `id_commande` int(255) NOT NULL,
   PRIMARY KEY (`id_facture`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `historique`
+-- Table structure for table `historique`
 --
 
 DROP TABLE IF EXISTS `historique`;
@@ -247,7 +248,7 @@ CREATE TABLE IF NOT EXISTS `historique` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `membership`
+-- Table structure for table `membership`
 --
 
 DROP TABLE IF EXISTS `membership`;
@@ -260,7 +261,7 @@ CREATE TABLE IF NOT EXISTS `membership` (
 ) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `membership`
+-- Dumping data for table `membership`
 --
 
 INSERT INTO `membership` (`id_membership`, `nom_membership`, `solde_min`, `solde_max`) VALUES
@@ -271,7 +272,7 @@ INSERT INTO `membership` (`id_membership`, `nom_membership`, `solde_min`, `solde
 -- --------------------------------------------------------
 
 --
--- Structure de la table `paiement`
+-- Table structure for table `paiement`
 --
 
 DROP TABLE IF EXISTS `paiement`;
@@ -287,7 +288,7 @@ CREATE TABLE IF NOT EXISTS `paiement` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `paiement_historique`
+-- Table structure for table `paiement_historique`
 --
 
 DROP TABLE IF EXISTS `paiement_historique`;
@@ -300,7 +301,7 @@ CREATE TABLE IF NOT EXISTS `paiement_historique` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reduction`
+-- Table structure for table `reduction`
 --
 
 DROP TABLE IF EXISTS `reduction`;
@@ -316,7 +317,7 @@ CREATE TABLE IF NOT EXISTS `reduction` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `reduction_historique`
+-- Table structure for table `reduction_historique`
 --
 
 DROP TABLE IF EXISTS `reduction_historique`;
@@ -329,7 +330,7 @@ CREATE TABLE IF NOT EXISTS `reduction_historique` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `solde_de_points`
+-- Table structure for table `solde_de_points`
 --
 
 DROP TABLE IF EXISTS `solde_de_points`;
@@ -341,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `solde_de_points` (
 ) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
 --
--- Déchargement des données de la table `solde_de_points`
+-- Dumping data for table `solde_de_points`
 --
 
 INSERT INTO `solde_de_points` (`id_solde`, `nombre_points`, `date_expiration`) VALUES
@@ -351,7 +352,7 @@ INSERT INTO `solde_de_points` (`id_solde`, `nombre_points`, `date_expiration`) V
 -- --------------------------------------------------------
 
 --
--- Structure de la table `stock`
+-- Table structure for table `stock`
 --
 
 DROP TABLE IF EXISTS `stock`;
@@ -361,7 +362,16 @@ CREATE TABLE IF NOT EXISTS `stock` (
   `quantite_produit` int(11) NOT NULL,
   `id_article` int(11) NOT NULL,
   PRIMARY KEY (`id_stock`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `stock`
+--
+
+INSERT INTO `stock` (`id_stock`, `statut_article`, `quantite_produit`, `id_article`) VALUES
+(1, 'Expédié', 2, 1),
+(2, 'En stock', 2, 2),
+(6, 'Cadeau gratuit', 2, 9);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

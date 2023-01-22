@@ -120,7 +120,7 @@ try {
             if(isset($_GET['id_article']) && $_GET['id_article']>0){
                 (new UpdateArticle())->execute($_GET['id_article'], $_POST);   
             }
-        }
+        } 
         
         else {
             throw new Exception("La page que vous recherchez n'existe pas.");

@@ -97,11 +97,11 @@ try {
             }
         } 
         //ajout article dans une commande
-        else if($GET['action'] === "search_article"){
-            if(isset($_GET['id_article']) && $_GET['id_article']>0){
-                (new SearchArticle())->execute($_POST);
-            }
-        }
+        // else if($GET['action'] === "search_article"){
+        //     if(isset($_GET['id_article']) && $_GET['id_article']>0){
+        //         (new SearchArticle())->execute($_POST);
+        //     }
+        // }
 
         ///article
         else if ($_GET['action'] === 'gestion_des_articles') {

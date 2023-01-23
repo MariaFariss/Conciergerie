@@ -173,6 +173,25 @@ class CommandeRepository
         }
         return $articles;
     }
+    //pour chercher un article
+    public function searchArticles($search_query): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM article WHERE nom_article LIKE ?"
+        );
+        $statement->execute(["%$search_query%"]);
+        $articles = [];
+        while (($row = $statement->fetch())) {
+            $article = new Article();
+            $article->id_article = $row['id_article'];
+            $article->nom_article = $row['nom_article'];
+            $article->prix_commande = $row['prix_commande'];
+            $article->prix_magasin = $row['prix_magasin'];
+            $article->prix_vip = $row['prix_vip'];
+            $articles[] = $article;
+        }
+        return $articles;
+    }
 
     public function addFacture(int $id_commande, array $articles): int
     {
@@ -228,7 +247,7 @@ class CommandeRepository
     public function getArticlesByFacture(int $id_facture): array
     {
         $statement = $this->connection->getConnection()->prepare(
-            "SELECT * FROM article join article_facture on article.id_article = article_facture.id_article WHERE id_facture = ?"
+            "SELECT * FROM article join article_facture on article.id_article = article_facture.id_article WHERE id_facture = ? ORDER BY nom_article"
         );
         $statement->execute([$id_facture]);
         $articles = [];
@@ -243,4 +262,19 @@ class CommandeRepository
         }
         return $articles;
     }
+
+    public function getQuantitesArticlesByFacture(int $id_facture): array
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT * FROM article_facture WHERE id_facture = ?"
+        );
+        $statement->execute([$id_facture]);
+        $articles = [];
+        while (($row = $statement->fetch())) {
+            $articles[$row['id_article']] = $row['Quantite'];
+        }
+        return $articles;
+    }
+
+
 }

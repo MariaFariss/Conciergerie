@@ -38,7 +38,7 @@
             <input type="text" id="id_client" name="id_client" placeholder="id client" required></br>
         </div>
         <a href="index.php?action=search_article?>">
-            <button class="bouttonCommande" value="Ajouter des articles">
+            <button class="bouttonCommande" value="Ajouter les articles">
         </a>
     </form>
 </div>

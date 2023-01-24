@@ -37,9 +37,7 @@
             <label for="id_client">Id client</label></br>
             <input type="text" id="id_client" name="id_client" placeholder="id client" required></br>
         </div>
-        <a href="index.php?action=search_article?>">
             <button class="bouttonCommande" value="Ajouter les articles"/>
-        </a>
     </form>
 </div>
 <?php $content = ob_get_clean(); ?>

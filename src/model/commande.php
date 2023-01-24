@@ -46,7 +46,7 @@ class CommandeRepository
         return $commandes;
     }
 
-    public function addCommand(String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note, int $id_client): bool
+    public function addCommand(String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note, int $id_client): int
     {
         $statement = $this->connection->getConnection()->prepare(
             "INSERT INTO commande (date_commande, total, date_livraison, frais_depot, restant_a_payer, frais_livraison, statut, date_expedition, note, id_client) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
@@ -54,7 +54,8 @@ class CommandeRepository
         $date_commande = date("Y-m-d H:i:s", strtotime($date_commande));
         $date_livraison = date("Y-m-d H:i:s", strtotime($date_livraison));
         $date_expedition = date("Y-m-d H:i:s", strtotime($date_expedition));
-        return $statement->execute([$date_commande, $total, $date_livraison, $frais_depot, $restant_a_payer, $frais_livraison, $statut, $date_expedition, $note, $id_client]) > 0;
+        $statement->execute([$date_commande, $total, $date_livraison, $frais_depot, $restant_a_payer, $frais_livraison, $statut, $date_expedition, $note, $id_client]);
+        return $this->connection->getConnection()->lastInsertId();
     }
 
     //update commande

@@ -7,11 +7,8 @@ Class SearchArticle
         $search = new CommandeRepository();
         $search->connection = new DatabaseConnection();
         $results = $search->searchArticles($input['search_query']);
-        if ($results) {
-            require('templates/commande/ajouter_article_pour_commande.php');
-        } else{
-            throw new \Exception('Impossible de trouver l\'article !');
-        }
+        $id_commande = $_GET['id_commande'];
+        require('templates/commande/ajouter_article_pour_commande.php');
         
     }
 }

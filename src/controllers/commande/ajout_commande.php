@@ -6,12 +6,7 @@ class AjoutCommande
     public function execute(array $input) {
         $commande = new CommandeRepository();
         $commande->connection = new DatabaseConnection();
-        $commande->addCommand($input['date_commande'], $input['total'], $input['date_livraison'], $input['frais_depot'], $input['restant_a_payer'], $input['frais_livraison'], $input['statut'], $input['date_expedition'], $input['note'], $input['id_client']);
-        if ($commande) {
-            header('Location: index.php');
-        } else{
-            throw new \Exception('Impossible d\'ajouter la commande !');
-        }
-        
+        $id_commande = $commande->addCommand($input['date_commande'], $input['total'], $input['date_livraison'], $input['frais_depot'], $input['restant_a_payer'], $input['frais_livraison'], $input['statut'], $input['date_expedition'], $input['note'], $input['id_client']);
+        require('templates/commande/ajouter_article_pour_commande.php');
     }
 }

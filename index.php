@@ -87,7 +87,9 @@ try {
         }
         //ajout article dans une commande
         else if ($_GET['action'] === "search_article") {
-            (new SearchArticle())->execute($_POST);
+            if (isset($_GET['id_commande']) && $_GET['id_commande'] > 0) {
+                (new SearchArticle())->execute($_POST);
+            }
         }
 
         ///article

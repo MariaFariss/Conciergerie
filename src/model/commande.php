@@ -4,7 +4,8 @@ require_once('src/lib/database.php');
 require_once('src/model/Facture.php');
 require_once('src/model/Paiement.php');
 require_once('src/model/Article.php');
-class Commande{
+class Commande
+{
     public int $id_commande;
     public string $date_commande;
     public float $total;
@@ -45,7 +46,8 @@ class CommandeRepository
         return $commandes;
     }
 
-    public function addCommand(String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note, int $id_client):bool {
+    public function addCommand(String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note, int $id_client): bool
+    {
         $statement = $this->connection->getConnection()->prepare(
             "INSERT INTO commande (date_commande, total, date_livraison, frais_depot, restant_a_payer, frais_livraison, statut, date_expedition, note, id_client) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
         );
@@ -56,7 +58,8 @@ class CommandeRepository
     }
 
     //update commande
-    public function updateCommand(int $id_commande, String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note, int $id_client):bool {
+    public function updateCommand(int $id_commande, String $date_commande, float $total, String $date_livraison, float $frais_depot, float $restant_a_payer, float $frais_livraison, String $statut, String $date_expedition, String $note, int $id_client): bool
+    {
         $statement = $this->connection->getConnection()->prepare(
             "UPDATE commande SET date_commande = ?, total = ?, date_livraison = ?, frais_depot = ?, restant_a_payer = ?, frais_livraison = ?, statut = ?, date_expedition = ?, note = ?, id_client = ? WHERE id_commande = ?"
         );
@@ -88,7 +91,7 @@ class CommandeRepository
         $commande->id_client = $row['id_client'];
         return $commande;
     }
-    
+
     //getfacture
     public function getFacture(int $id_commande): array
     {
@@ -98,7 +101,7 @@ class CommandeRepository
         $statement->execute([$id_commande]);
         $factures = [];
         $facture = new Facture();
-        $rows = $statement->fetchAll(PDO :: FETCH_ASSOC);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach ($rows as $row) {
             $facture->id_facture = $row['id_facture'];
             $facture->date_creation = $row['date_creation'];
@@ -118,7 +121,7 @@ class CommandeRepository
         $statement->execute([$id_commande]);
         $paiements = [];
         $paiement = new Paiement();
-        $rows = $statement->fetchAll(PDO :: FETCH_ASSOC);
+        $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach ($rows as $row) {
             $paiement->id_paiement = $row['id_paiement'];
             $paiement->montant = $row['montant'];
@@ -275,6 +278,4 @@ class CommandeRepository
         }
         return $articles;
     }
-
-
 }

@@ -55,7 +55,7 @@
                         </a>
                     </td>
                     <td>
-                        <a href="#">
+                        <a href="index.php?action=delete_commande&id_commande=<?= $commande->id_commande ?>">
                             <iconify-icon icon="ic:baseline-delete" width="30" height="30"></iconify-icon>
                         </a>
                     </td>

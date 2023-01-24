@@ -22,7 +22,8 @@
     <p>Téléphone : <?= $client->telephone ?></p>
 </div>
 
-<div class="ligne2">
+<div style="padding-top: 30px; padding-bottom: 30px;">
+    <div class="ligne2">
     <table border=1 frame=void rules=rows>
         <thead>
             <th>N°</th>
@@ -60,6 +61,8 @@
         </tbody>
     </table>
 </div>
+</div>
+
 
 <div class="ligne2" style="float: right;">
     <p>Montant Commande : <?= $commande->total ?> $</p>

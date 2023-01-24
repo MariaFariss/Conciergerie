@@ -92,6 +92,16 @@ class CommandeRepository
         return $commande;
     }
 
+        //deleteCommande
+        public function deleteCommande(int $id_commande): bool
+        {
+            $statement = $this->connection->getConnection()->prepare(
+                "DELETE FROM commande WHERE id_commande = ?"
+            );
+            $statement->execute([$id_commande]);
+            return $statement->rowCount() > 0;
+        }
+
     //getfacture
     public function getFacture(int $id_commande): array
     {
@@ -278,4 +288,6 @@ class CommandeRepository
         }
         return $articles;
     }
+
+
 }

@@ -63,7 +63,7 @@
                     <input type="submit" class="boutton1" value="Ajouter une commande">
                     </a>
                     <a href="index.php?action=gestion_des_articles">
-                    <input type="submit" class="boutton" value="Article">
+                    <input type="submit" class="bouttonArticle" value="Article">
                     </a>
                 </tr>
 

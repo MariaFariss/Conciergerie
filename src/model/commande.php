@@ -93,15 +93,24 @@ class CommandeRepository
         return $commande;
     }
 
-        //deleteCommande
-        public function deleteCommande(int $id_commande): bool
-        {
-            $statement = $this->connection->getConnection()->prepare(
-                "DELETE FROM commande WHERE id_commande = ?"
-            );
-            $statement->execute([$id_commande]);
-            return $statement->rowCount() > 0;
-        }
+    //deleteCommande
+    public function deleteCommande(int $id_commande): bool
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "DELETE FROM commande WHERE id_commande = ?"
+        );
+        $statement->execute([$id_commande]);
+        $statement = $this->connection->getConnection()->prepare(
+            "DELETE FROM facture WHERE id_commande = ?"
+        );
+        $statement->execute([$id_commande]);
+        $statement = $this->connection->getConnection()->prepare(
+            "DELETE FROM article_commande WHERE id_commande = ?"
+        );
+        $statement->execute([$id_commande]);
+        
+        return $statement->rowCount() > 0;
+    }
 
     //getfacture
     public function getFacture(int $id_commande): array
@@ -111,9 +120,9 @@ class CommandeRepository
         );
         $statement->execute([$id_commande]);
         $factures = [];
-        $facture = new Facture();
         $rows = $statement->fetchAll(PDO::FETCH_ASSOC);
         foreach ($rows as $row) {
+            $facture = new Facture();
             $facture->id_facture = $row['id_facture'];
             $facture->date_creation = $row['date_creation'];
             $facture->date_mise_a_jour = $row['date_mise_a_jour'];
@@ -290,5 +299,25 @@ class CommandeRepository
         return $articles;
     }
 
+    public function addArticleCommande(int $id_commande, int $id_article, int $quantite): void
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT quantite_commande FROM article_commande WHERE id_article = ? AND id_commande = ?"
+        );
 
+        $statement->execute([$id_article, $id_commande]);
+        if ($statement->rowCount() == 0) {
+            $statement = $this->connection->getConnection()->prepare(
+                "INSERT INTO article_commande (id_article, id_commande, quantite_commande) VALUES (?, ?, ?)"
+            );
+            $statement->execute([$id_article, $id_commande, $quantite]);
+            return;
+        }
+        $row = $statement->fetch();
+        $quantite += $row['quantite_commande'];
+        $statement = $this->connection->getConnection()->prepare(
+            "UPDATE article_commande SET quantite_commande = quantite_commande + ? WHERE id_article = ? AND id_commande = ?"
+        );
+        $statement->execute([$quantite, $id_article, $id_commande]);
+    }
 }

@@ -24,6 +24,7 @@ require_once('src/controllers/article/form_modifier_article.php');
 require_once('src/controllers/article/modifier_fiche_article.php');
 require_once('src/controllers/commande/search.php');
 require_once('src/controllers/commande/delete_commande.php');
+require_once('src/controllers/commande/ajout_article_commande.php');
 
 try {
     if (isset($_GET['action']) && $_GET['action'] !== '') {
@@ -89,6 +90,10 @@ try {
         else if ($_GET['action'] === "search_article") {
             if (isset($_GET['id_commande']) && $_GET['id_commande'] > 0) {
                 (new SearchArticle())->execute($_POST);
+            }
+        } else if ($_GET['action'] === "ajout_article_pour_commande") {
+            if (isset($_GET['id_commande']) && $_GET['id_commande'] > 0) {
+                (new AjoutArticleCommande())->execute($_GET['id_commande'], $_POST);
             }
         }
 

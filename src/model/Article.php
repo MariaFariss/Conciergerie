@@ -124,4 +124,15 @@ class ArticleRepository
         $article->prix_vip = $row['prix_vip'];
         return $article;
     }
+
+    public function getIdArticleByName(string $nom_article): int
+    {
+        $statement = $this->connection->getConnection()->prepare(
+            "SELECT id_article FROM article WHERE nom_article = ?"
+        );
+        $statement->execute([$nom_article]);
+        $row = $statement->fetch();
+        $id_article = $row['id_article'];
+        return $id_article;
+    }
 }

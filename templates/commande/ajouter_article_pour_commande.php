@@ -14,12 +14,12 @@
   if (empty($results)) {
     echo "Aucun résultat";
   } else { ?>
-  <form action="">
+  <form action="index.php?action=ajout_article_pour_commande&id_commande=<?= $id_commande ?>" method="post">
   <?php
     foreach ($results as $result) {
 ?>
       
-        <input type="checkbox" name="<?= $result->nom_article ?>" value="<?= $result->nom_article ?>"><?= $result->id_article ?><?= $result->nom_article ?> <input type="number" name="<?= $result->id_article ?> "min="1" max="150" step="1" value="1">
+        <?= $result->id_article ?><?= $result->nom_article ?> <input type="number" name="<?= $result->nom_article ?> "min="1" max="150" step="1" value="1">
         <br>
 
   <?php }

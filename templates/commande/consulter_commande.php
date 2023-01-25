@@ -1,7 +1,7 @@
 <?php $title = "Consulter une fiche client"; ?>
 
 <?php ob_start(); ?>
-<?php require('./templates/autres/background.php') ?>
+<!-- <?php require('./templates/autres/background.php') ?> -->
 <h1 class="title">Consulter une commande</h1>
 <a href="index.php"><iconify-icon icon="material-symbols:home" width="40" class="icone2"></iconify-icon></a>
 <div class="ligne" style="display: flex;">
@@ -18,12 +18,12 @@
             <p>Montant : "<?= $paiements->montant ?>"</p>
             <p>Date : "<?= $paiements->date ?>"</p>
             <p>Mode de paiement : "<?= $paiements->mode_paiement ?>"</p>
-            <?php endforeach; ?>
+        <?php endforeach; ?>
         <div>
             <h1>Factures</h1>
             <?php foreach ($facture as $facture) : ?>
                 <p>Facture numero "<?= $facture->id_facture ?>"</p>
-                <p>Facture du : "<?= $facture->date ?>"</p>
+                <p>Facture du : "<?= $facture->date_creation ?>"</p>
                 <p>Montant : "<?= $facture->montant ?>"</p>
                 <td>
                     <a href="#">
@@ -34,7 +34,7 @@
 
         </div>
     </div>
-    <div class="rightInfo" >
+    <div class="rightInfo">
         <p>Frais de livraison : "<?= $commande->date_commande ?>"</p>
         <p>Frais de depot : "<?= $commande->frais_depot ?>"</p>
         <p>Note : "<?= $commande->note ?>"</p>
